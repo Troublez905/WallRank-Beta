@@ -1,0 +1,148 @@
+import type { LeaderboardItem, SpotListItem } from "@/types/domain";
+
+export const mockSpots: SpotListItem[] = [
+  {
+    id: "77777777-7777-7777-7777-777777777777",
+    slug: "king-william-burner",
+    title: "King William Burner",
+    category: "piece",
+    status: "active",
+    avgRating: 4.6,
+    ratingsCount: 18,
+    isFeatured: true,
+    artist: {
+      id: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+      tagName: "AERO",
+      slug: "aero",
+    },
+    location: {
+      name: "King William Wall",
+      city: "Hamilton",
+      latitude: 43.255203,
+      longitude: -79.868202,
+      visibility: "public_approximate",
+    },
+    primaryImage: {
+      imageUrl: "https://images.unsplash.com/photo-1513039464749-94912b3841e7?auto=format&fit=crop&w=1200&q=80",
+      thumbnailUrl: "https://images.unsplash.com/photo-1513039464749-94912b3841e7?auto=format&fit=crop&w=800&q=80",
+    },
+  },
+  {
+    id: "88888888-8888-8888-8888-888888888888",
+    slug: "junction-mural",
+    title: "Junction Mural",
+    category: "mural",
+    status: "active",
+    avgRating: 4.2,
+    ratingsCount: 10,
+    isFeatured: false,
+    artist: {
+      id: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+      tagName: "NOVA",
+      slug: "nova",
+    },
+    location: {
+      name: "Laneway Junction",
+      city: "Toronto",
+      latitude: 43.669021,
+      longitude: -79.442851,
+      visibility: "public_exact",
+    },
+    primaryImage: {
+      imageUrl: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+      thumbnailUrl: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80",
+    },
+  },
+  {
+    id: "99999999-9999-9999-9999-999999999999",
+    slug: "canal-throwup",
+    title: "Canal Throwup",
+    category: "throwup",
+    status: "historic",
+    avgRating: 4,
+    ratingsCount: 7,
+    isFeatured: false,
+    artist: {
+      id: "cccccccc-cccc-cccc-cccc-cccccccccccc",
+      tagName: "BRICK",
+      slug: "brick",
+    },
+    location: {
+      name: "Canal Wall",
+      city: "Niagara",
+      latitude: 43.012321,
+      longitude: -79.248321,
+      visibility: "public_approximate",
+    },
+    primaryImage: {
+      imageUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80",
+      thumbnailUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80",
+    },
+  },
+];
+
+export const mockArtistLeaderboard: LeaderboardItem[] = [
+  {
+    rank: 1,
+    entityId: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
+    name: "AERO",
+    slug: "aero",
+    city: "Hamilton",
+    monthlyPoints: 28,
+    totalPoints: 931,
+    avgRating: 4.62,
+  },
+  {
+    rank: 2,
+    entityId: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    name: "NOVA",
+    slug: "nova",
+    city: "Toronto",
+    monthlyPoints: 19,
+    totalPoints: 774,
+    avgRating: 4.24,
+  },
+  {
+    rank: 3,
+    entityId: "cccccccc-cccc-cccc-cccc-cccccccccccc",
+    name: "BRICK",
+    slug: "brick",
+    city: "Niagara",
+    monthlyPoints: 12,
+    totalPoints: 712,
+    avgRating: 4.11,
+  },
+];
+
+export const mockSupporterLeaderboard: LeaderboardItem[] = [
+  {
+    rank: 1,
+    entityId: "22222222-2222-2222-2222-222222222222",
+    name: "MayaSpray",
+    slug: null,
+    city: "Hamilton",
+    monthlyPoints: 148,
+    totalPoints: 148,
+    avgRating: null,
+  },
+  {
+    rank: 2,
+    entityId: "33333333-3333-3333-3333-333333333333",
+    name: "JoelNorth",
+    slug: null,
+    city: "Toronto",
+    monthlyPoints: 121,
+    totalPoints: 121,
+    avgRating: null,
+  },
+  {
+    rank: 3,
+    entityId: "44444444-4444-4444-4444-444444444444",
+    name: "WallScout",
+    slug: null,
+    city: "Niagara",
+    monthlyPoints: 109,
+    totalPoints: 109,
+    avgRating: null,
+  },
+];
