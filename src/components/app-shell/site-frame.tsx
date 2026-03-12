@@ -1,13 +1,18 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { signOutAction } from "@/app/(auth)/actions";
 import { navigation } from "@/lib/site-data";
+import { getAuthContext } from "@/server/auth/context";
 
 type SiteFrameProps = {
   children: ReactNode;
 };
 
-export function SiteFrame({ children }: SiteFrameProps) {
+export async function SiteFrame({ children }: SiteFrameProps) {
+  const auth = await getAuthContext();
+  const identity = auth.profile?.displayName || auth.profile?.username || auth.user?.email || "Profile";
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       <div className="grain-overlay" />
@@ -29,12 +34,27 @@ export function SiteFrame({ children }: SiteFrameProps) {
             ))}
           </nav>
           <div className="flex items-center gap-3 text-sm">
-            <Link href="/sign-in" className="rounded-full border border-line px-4 py-2 text-muted transition hover:text-foreground">
-              Sign In
-            </Link>
-            <Link href="/upload" className="rounded-full bg-accent px-4 py-2 font-medium text-black transition hover:bg-[#ff812e]">
-              Join Free
-            </Link>
+            {auth.user ? (
+              <>
+                <Link href="/profile" className="rounded-full border border-line px-4 py-2 text-muted transition hover:text-foreground">
+                  {identity}
+                </Link>
+                <form action={signOutAction}>
+                  <button type="submit" className="rounded-full bg-accent px-4 py-2 font-medium text-black transition hover:bg-[#ff812e]">
+                    Sign Out
+                  </button>
+                </form>
+              </>
+            ) : (
+              <>
+                <Link href="/sign-in" className="rounded-full border border-line px-4 py-2 text-muted transition hover:text-foreground">
+                  Sign In
+                </Link>
+                <Link href="/sign-up" className="rounded-full bg-accent px-4 py-2 font-medium text-black transition hover:bg-[#ff812e]">
+                  Join Free
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </header>
