@@ -16,7 +16,7 @@ export default async function UploadPage({ searchParams }: UploadPageProps) {
       <PageHeader
         eyebrow="Upload flow"
         title="Submit a wall to moderation."
-        description="This first pass stores a location and artwork record, plus an optional remote image URL, under pending moderation for admin review."
+        description="This flow now uploads an image into Supabase Storage, then stores the location, artwork, and pending image record for moderation."
       />
 
       <section className="section-shell max-w-5xl">
@@ -118,9 +118,25 @@ export default async function UploadPage({ searchParams }: UploadPageProps) {
               <h2 className="display mt-2 text-4xl">Finish submission</h2>
             </div>
             <label className="grid gap-2 text-sm">
-              <span className="text-muted">Image URL (temporary until storage upload is wired)</span>
-              <input name="imageUrl" placeholder="https://..." className="rounded-[18px] border border-line bg-black/20 px-4 py-3 outline-none transition focus:border-accent" />
+              <span className="text-muted">Artwork image</span>
+              <input
+                type="file"
+                name="imageFile"
+                accept="image/png,image/jpeg,image/webp,image/avif"
+                className="rounded-[18px] border border-line bg-black/20 px-4 py-3 outline-none transition file:mr-4 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium file:text-black focus:border-accent"
+              />
             </label>
+            <label className="grid gap-2 text-sm">
+              <span className="text-muted">Remote image URL fallback</span>
+              <input
+                name="imageUrl"
+                placeholder="https://..."
+                className="rounded-[18px] border border-line bg-black/20 px-4 py-3 outline-none transition focus:border-accent"
+              />
+            </label>
+            <div className="rounded-[24px] border border-dashed border-line p-4 text-sm leading-6 text-muted">
+              Use the file field for the normal path. The URL field is only a fallback for already-hosted images. At least one image source is required.
+            </div>
             <label className="flex items-start gap-3 rounded-[24px] border border-line p-4 text-sm text-muted">
               <input type="checkbox" name="agreement" className="mt-1" />
               <span>I confirm this upload should enter moderation and I understand public visibility may be generalized for sensitive locations.</span>
