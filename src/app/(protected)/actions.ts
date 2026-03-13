@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 
+import { getSupabaseStorageBucket } from "@/lib/env";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getAuthContext } from "@/server/auth/context";
 import type { Database } from "@/types/database";
@@ -16,6 +17,27 @@ function slugify(input: string) {
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)+/g, "");
+}
+
+function getFileExtension(fileName: string, mimeType: string) {
+  const byName = fileName.includes(".") ? fileName.split(".").pop()?.toLowerCase() : null;
+
+  if (byName) {
+    return byName;
+  }
+
+  switch (mimeType) {
+    case "image/jpeg":
+      return "jpg";
+    case "image/png":
+      return "png";
+    case "image/webp":
+      return "webp";
+    case "image/avif":
+      return "avif";
+    default:
+      return "bin";
+  }
 }
 
 export async function updateProfileAction(formData: FormData) {
@@ -76,11 +98,30 @@ export async function uploadSpotAction(formData: FormData) {
     .split(",")
     .map((tag) => tag.trim())
     .filter(Boolean);
+  const imageFile = formData.get("imageFile");
   const imageUrl = String(formData.get("imageUrl") ?? "").trim() || null;
   const agreement = formData.get("agreement");
 
   if (!title || !category || !agreement || Number.isNaN(latitude) || Number.isNaN(longitude)) {
     redirectWithMessage("/upload", "error", "Please complete the required upload fields.");
+  }
+
+  const uploadedFile = imageFile instanceof File && imageFile.size > 0 ? imageFile : null;
+
+  if (!uploadedFile && !imageUrl) {
+    redirectWithMessage("/upload", "error", "Add an image file or a remote image URL before submitting.");
+  }
+
+  if (uploadedFile) {
+    const allowedTypes = new Set(["image/jpeg", "image/png", "image/webp", "image/avif"]);
+
+    if (!allowedTypes.has(uploadedFile.type)) {
+      redirectWithMessage("/upload", "error", "Upload a JPG, PNG, WebP, or AVIF image.");
+    }
+
+    if (uploadedFile.size > 10 * 1024 * 1024) {
+      redirectWithMessage("/upload", "error", "Image files must be 10 MB or smaller.");
+    }
   }
 
   let artistId: string | null = null;
@@ -117,6 +158,26 @@ export async function uploadSpotAction(formData: FormData) {
   }
 
   const slug = `${slugify(title)}-${Date.now().toString().slice(-6)}`;
+  const bucket = getSupabaseStorageBucket();
+  let storedImageUrl = imageUrl;
+  let storedImagePath: string | null = null;
+
+  if (uploadedFile) {
+    const extension = getFileExtension(uploadedFile.name, uploadedFile.type);
+    const objectPath = `${userId}/artworks/${slug}-${Date.now()}.${extension}`;
+    const { error: uploadError } = await supabase.storage.from(bucket).upload(objectPath, uploadedFile, {
+      upsert: false,
+      contentType: uploadedFile.type,
+    });
+
+    if (uploadError) {
+      redirectWithMessage("/upload", "error", uploadError.message);
+    }
+
+    storedImagePath = objectPath;
+    storedImageUrl = supabase.storage.from(bucket).getPublicUrl(objectPath).data.publicUrl;
+  }
+
   const artworkInsert: Database["public"]["Tables"]["artworks"]["Insert"] = {
     artist_id: artistId,
     location_id: (location as { id: string }).id,
@@ -138,19 +199,32 @@ export async function uploadSpotAction(formData: FormData) {
     .single();
 
   if (artworkError || !artwork) {
+    if (storedImagePath) {
+      await supabase.storage.from(bucket).remove([storedImagePath]);
+    }
+
     redirectWithMessage("/upload", "error", artworkError?.message ?? "Unable to save artwork.");
   }
 
-  if (imageUrl) {
+  if (storedImageUrl) {
     const imageInsert: Database["public"]["Tables"]["artwork_images"]["Insert"] = {
       artwork_id: (artwork as { id: string }).id,
       uploaded_by_user_id: userId,
-      image_url: imageUrl,
+      image_url: storedImageUrl,
+      thumbnail_url: storedImageUrl,
       is_primary: true,
       moderation_status: "pending",
     };
 
-    await supabase.from("artwork_images").insert(imageInsert as never);
+    const { error: imageInsertError } = await supabase.from("artwork_images").insert(imageInsert as never);
+
+    if (imageInsertError) {
+      if (storedImagePath) {
+        await supabase.storage.from(bucket).remove([storedImagePath]);
+      }
+
+      redirectWithMessage("/upload", "error", imageInsertError.message);
+    }
   }
 
   redirectWithMessage("/upload", "message", "Spot submitted to moderation.");

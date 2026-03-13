@@ -1,5 +1,6 @@
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseStorageBucket = process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET || "artwork-images";
 
 export function hasSupabaseEnv() {
   return Boolean(supabaseUrl && supabaseAnonKey);
@@ -16,4 +17,8 @@ export function getSupabaseEnv() {
     url: supabaseUrl!,
     anonKey: supabaseAnonKey!,
   };
+}
+
+export function getSupabaseStorageBucket() {
+  return supabaseStorageBucket;
 }
