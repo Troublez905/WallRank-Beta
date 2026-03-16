@@ -119,12 +119,6 @@ on public.artists
 for select
 using (true);
 
-create policy "authenticated users can insert artists"
-on public.artists
-for insert
-to authenticated
-with check (owner_user_id = auth.uid());
-
 create policy "owners and staff can update artists"
 on public.artists
 for update

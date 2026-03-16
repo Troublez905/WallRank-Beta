@@ -175,7 +175,7 @@ export async function uploadSpotAction(formData: FormData) {
     }
 
     storedImagePath = objectPath;
-    storedImageUrl = supabase.storage.from(bucket).getPublicUrl(objectPath).data.publicUrl;
+    storedImageUrl = objectPath;
   }
 
   const artworkInsert: Database["public"]["Tables"]["artworks"]["Insert"] = {

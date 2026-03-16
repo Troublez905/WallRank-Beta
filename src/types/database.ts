@@ -40,6 +40,39 @@ export type Database = {
         };
         Update: Partial<Database["public"]["Tables"]["artists"]["Row"]>;
       };
+      artist_point_events: {
+        Row: {
+          artist_id: string;
+          artwork_id: string | null;
+          created_at: string;
+          id: string;
+          points: number;
+          source_id: string | null;
+          source_type: "rating" | "comment_bonus" | "share_bonus" | "feature_bonus" | "admin_adjustment";
+        };
+        Insert: Partial<Database["public"]["Tables"]["artist_point_events"]["Row"]> & {
+          artist_id: string;
+          points: number;
+          source_type: Database["public"]["Tables"]["artist_point_events"]["Row"]["source_type"];
+        };
+        Update: Partial<Database["public"]["Tables"]["artist_point_events"]["Row"]>;
+      };
+      artist_claim_requests: {
+        Row: {
+          artist_id: string;
+          created_at: string;
+          id: string;
+          message: string | null;
+          reviewed_at: string | null;
+          status: "pending" | "approved" | "rejected";
+          user_id: string;
+        };
+        Insert: Partial<Database["public"]["Tables"]["artist_claim_requests"]["Row"]> & {
+          artist_id: string;
+          user_id: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["artist_claim_requests"]["Row"]>;
+      };
       artwork_images: {
         Row: {
           artwork_id: string;
@@ -61,6 +94,24 @@ export type Database = {
           uploaded_by_user_id: string;
         };
         Update: Partial<Database["public"]["Tables"]["artwork_images"]["Row"]>;
+      };
+      featured_artists: {
+        Row: {
+          article_excerpt: string | null;
+          artist_id: string;
+          created_at: string;
+          feature_month: string;
+          feature_type: "homepage_top5" | "magazine" | "instore" | "seasonal";
+          headline: string | null;
+          id: string;
+          is_published: boolean;
+        };
+        Insert: Partial<Database["public"]["Tables"]["featured_artists"]["Row"]> & {
+          artist_id: string;
+          feature_month: string;
+          feature_type: Database["public"]["Tables"]["featured_artists"]["Row"]["feature_type"];
+        };
+        Update: Partial<Database["public"]["Tables"]["featured_artists"]["Row"]>;
       };
       artworks: {
         Row: {
@@ -174,6 +225,42 @@ export type Database = {
           user_id: string;
         };
         Update: Partial<Database["public"]["Tables"]["ratings"]["Row"]>;
+      };
+      reports: {
+        Row: {
+          created_at: string;
+          id: string;
+          notes: string | null;
+          reason: string;
+          reported_by_user_id: string;
+          resolved_at: string | null;
+          status: "open" | "reviewing" | "resolved" | "dismissed";
+          target_id: string;
+          target_type: "artwork" | "image" | "comment" | "artist" | "user";
+        };
+        Insert: Partial<Database["public"]["Tables"]["reports"]["Row"]> & {
+          reason: string;
+          reported_by_user_id: string;
+          target_id: string;
+          target_type: Database["public"]["Tables"]["reports"]["Row"]["target_type"];
+        };
+        Update: Partial<Database["public"]["Tables"]["reports"]["Row"]>;
+      };
+      supporter_point_events: {
+        Row: {
+          created_at: string;
+          id: string;
+          points: number;
+          source_id: string | null;
+          source_type: "rating" | "comment" | "upload_approved" | "share" | "invite" | "admin_adjustment";
+          user_id: string;
+        };
+        Insert: Partial<Database["public"]["Tables"]["supporter_point_events"]["Row"]> & {
+          points: number;
+          source_type: Database["public"]["Tables"]["supporter_point_events"]["Row"]["source_type"];
+          user_id: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["supporter_point_events"]["Row"]>;
       };
       users: {
         Row: {

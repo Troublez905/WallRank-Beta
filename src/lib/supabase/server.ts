@@ -1,7 +1,13 @@
 import { createServerClient } from "@supabase/ssr";
+import { createClient } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 
-import { getSupabaseEnv, hasSupabaseEnv } from "@/lib/env";
+import {
+  getSupabaseEnv,
+  getSupabaseServiceRoleEnv,
+  hasSupabaseEnv,
+  hasSupabaseServiceRoleEnv,
+} from "@/lib/env";
 import type { Database } from "@/types/database";
 
 export async function createSupabaseServerClient() {
@@ -22,6 +28,21 @@ export async function createSupabaseServerClient() {
           cookieStore.set(name, value, options);
         });
       },
+    },
+  });
+}
+
+export function createSupabaseAdminClient() {
+  if (!hasSupabaseServiceRoleEnv()) {
+    return null;
+  }
+
+  const { url, serviceRoleKey } = getSupabaseServiceRoleEnv();
+
+  return createClient<Database>(url, serviceRoleKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
     },
   });
 }
