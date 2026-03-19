@@ -5,7 +5,7 @@
 update public.users
 set role = 'admin',
     updated_at = now()
-where email = 'admin@example.com';
+where email = 'djcurv905@gmail.com';
 
 -- Optional moderator example.
 -- update public.users
