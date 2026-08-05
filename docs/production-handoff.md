@@ -5,6 +5,7 @@ This document captures the current live deployment state for WallRank Beta and t
 ## Live Services
 
 - Production app: `https://wallrank-beta.vercel.app`
+- Branded production domain: `https://wallrank.ca`
 - Vercel project: `djcurv905s-projects/wallrank-beta`
 - Supabase project URL: `https://iroixrcarjciynjvoqdy.supabase.co`
 
@@ -14,6 +15,8 @@ This document captures the current live deployment state for WallRank Beta and t
 - The production environment is connected to Supabase.
 - Preview environment variables were added through the Vercel project API because the Vercel CLI preview flow was failing with a branch-selection bug in non-interactive mode.
 - The app is no longer in demo mode for live data reads.
+- Vercel Web Analytics and Speed Insights are mounted in the root layout.
+- Unhandled server request errors emit structured JSON to Vercel Runtime Logs.
 
 ## Vercel Configuration
 
@@ -29,6 +32,7 @@ Configured in Vercel:
 
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_SITE_URL` (`https://wallrank.ca` in production)
 
 Optional but not currently required:
 
