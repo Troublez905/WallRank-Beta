@@ -1,169 +1,39 @@
 import Link from "next/link";
 
+import { NewsletterForm } from "@/components/newsletter-form";
 import { featuredArtists, latestSpots, supporters } from "@/lib/site-data";
 
 export default function HomePage() {
   return (
     <div className="pb-16">
-      <section className="section-shell grid gap-8 py-12 md:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-        <div className="relative">
-          <div className="eyebrow">Live from the wall</div>
-          <h1 className="display mt-4 max-w-4xl text-6xl leading-[0.88] md:text-8xl">
-            Discover the streets. Rate the culture. Rise through the ranks.
-          </h1>
-          <p className="mt-6 max-w-2xl text-base leading-7 text-muted md:text-lg">
-            WallRank turns street art discovery into a living archive with map-based exploration, artist profiles, supporter points, and a monthly Top 5 feeding Concrete Culture features.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link href="/map" className="rounded-full bg-accent px-6 py-3 font-medium text-black transition hover:bg-[#ff812e]">
-              Explore Map
-            </Link>
-            <Link href="/upload" className="rounded-full border border-line px-6 py-3 text-muted transition hover:text-foreground">
-              Upload a Spot
-            </Link>
+      <section className="brick-band border-b border-white/60 py-12 md:py-20">
+        <div className="section-shell grid gap-8 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
+          <div className="line-panel p-6 md:p-9">
+            <h1 className="display max-w-3xl text-6xl leading-[.86] md:text-8xl">Discover the streets.<br />Rate the culture.<br /><span className="text-accent">Rise</span> through the ranks.</h1>
+            <p className="mt-6 max-w-xl border-l-4 border-red pl-4 leading-7 text-white/80">WallRank maps street art, spotlights local artists, and builds a living community archive across Hamilton and beyond.</p>
+            <div className="mt-8 flex flex-wrap gap-4"><Link href="/map" className="street-button street-button--yellow">Explore Map →</Link><Link href="/upload" className="street-button">Upload a Spot ↑</Link></div>
           </div>
-          <div className="spray-ring left-[-4rem] top-10 h-24 w-24 bg-accent-soft" />
-        </div>
-
-        <div className="panel relative overflow-hidden rounded-[32px] p-6">
-          <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,106,0,0.1),transparent_35%,rgba(212,179,139,0.08))]" />
-          <div className="relative grid gap-4">
-            <div className="rounded-[24px] border border-line bg-black/30 p-4">
-              <div className="flex items-center justify-between text-sm text-muted">
-                <span>Mini live map</span>
-                <span>38 recent pins</span>
-              </div>
-              <div className="mt-4 grid h-56 grid-cols-6 gap-3 rounded-[20px] bg-[radial-gradient(circle_at_20%_25%,rgba(255,106,0,0.35),transparent_18%),radial-gradient(circle_at_75%_55%,rgba(212,179,139,0.28),transparent_16%),linear-gradient(180deg,#161818_0%,#0f1011_100%)] p-4">
-                {Array.from({ length: 12 }).map((_, index) => (
-                  <div
-                    key={index}
-                    className={`rounded-full ${index % 3 === 0 ? "bg-accent" : "bg-sand"} ${index % 2 === 0 ? "h-3 w-3" : "h-2.5 w-2.5"} self-center justify-self-center shadow-[0_0_18px_rgba(255,106,0,0.5)]`}
-                  />
-                ))}
-              </div>
-            </div>
-            <div className="grid gap-3 md:grid-cols-3">
-              {featuredArtists.map((artist) => (
-                <article key={artist.rank} className="rounded-[24px] border border-line bg-panel-strong p-4">
-                  <div className="text-xs uppercase tracking-[0.28em] text-sand">#{artist.rank}</div>
-                  <div className="display mt-3 text-3xl">{artist.tag}</div>
-                  <div className="mt-1 text-sm text-muted">{artist.city}</div>
-                  <div className="mt-6 text-xs uppercase tracking-[0.2em] text-muted">Top piece</div>
-                  <div className="mt-1 text-sm text-foreground">{artist.piece}</div>
-                </article>
-              ))}
+          <div className="line-panel min-h-[430px] overflow-hidden p-5">
+            <div className="flex items-center justify-between border-b border-white/50 pb-4 text-xs font-bold uppercase tracking-[.16em]"><span>Live Hamilton wall map</span><Link href="/map" className="text-accent">View full map →</Link></div>
+            <div className="relative mt-5 min-h-[340px] bg-[radial-gradient(circle_at_40%_45%,rgba(244,255,0,.12),transparent_25%),linear-gradient(135deg,#242424,#080808)]">
+              <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,.16)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.16)_1px,transparent_1px)] [background-size:38px_38px]" />
+              {["left-[16%] top-[24%]","left-[38%] top-[58%]","left-[62%] top-[30%]","left-[78%] top-[65%]","left-[50%] top-[18%]"].map((position,index)=><div key={position} className={`absolute ${position} grid h-10 w-10 place-items-center border-2 border-black font-black text-black shadow-[3px_3px_0_white] ${index%2 ? "bg-red text-white" : "bg-accent"}`}>{index+1}</div>)}
+              <div className="display absolute bottom-5 left-5 text-5xl text-white/20">Hamilton</div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section-shell grid gap-4 pb-6 md:grid-cols-3">
-        {[
-          "Map-first exploration with filters for city, rating, status, artist, and radius.",
-          "Monthly Top 5 leaderboards for artists, plus supporter point progression.",
-          "Moderated uploads with timeline photos and sensitive-location privacy controls.",
-        ].map((copy) => (
-          <div key={copy} className="panel rounded-[24px] p-5 text-sm leading-6 text-muted">
-            {copy}
-          </div>
-        ))}
+      <section className="section-shell grid gap-6 py-12 lg:grid-cols-[1.15fr_.85fr]">
+        <div className="line-panel p-6"><div className="flex items-end justify-between gap-4"><div><div className="eyebrow">Monthly Top 5</div><h2 className="display mt-2 text-5xl">Artists leading the wall</h2></div><Link href="/leaderboard" className="street-link text-sm">Full board →</Link></div><div className="mt-7 grid gap-4 md:grid-cols-3">{featuredArtists.map((artist,index)=><article key={artist.rank} className={`p-5 ${index===0?"rank-one":index===1?"rank-two":"rank-three"}`}><div className="display text-7xl leading-none">{artist.rank}</div><div className="display mt-4 text-4xl">{artist.tag}</div><div className="mt-2 text-sm font-bold uppercase">{artist.city}</div><div className="mt-7 border-t border-current/30 pt-3 text-sm">{artist.score} points · {artist.piece}</div></article>)}</div></div>
+        <aside className="line-panel p-6"><div className="eyebrow">Top supporters</div><h2 className="display mt-2 text-4xl">People pushing culture</h2><div className="mt-6 grid gap-3">{supporters.map((supporter,index)=><div key={supporter.name} className="grid grid-cols-[48px_1fr_auto] items-center gap-3 border border-white/35 p-3"><div className="display text-4xl text-red">0{index+1}</div><div><div className="font-bold">{supporter.name}</div><div className="text-xs text-muted">{supporter.summary}</div></div><div className="font-bold text-accent">{supporter.points}</div></div>)}</div></aside>
       </section>
 
-      <section className="section-shell grid gap-6 py-10 lg:grid-cols-[1fr_0.9fr]">
-        <div className="panel rounded-[32px] p-6">
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="eyebrow">Monthly Top 5</div>
-              <h2 className="display mt-2 text-4xl">Artists leading this month</h2>
-            </div>
-            <Link href="/leaderboard" className="text-sm text-sand">
-              View leaderboard
-            </Link>
-          </div>
-          <div className="mt-6 grid gap-4">
-            {featuredArtists.map((artist) => (
-              <div key={artist.rank} className="grid gap-3 rounded-[24px] border border-line bg-black/20 p-4 md:grid-cols-[72px_1fr_auto] md:items-center">
-                <div className="display text-5xl text-accent">#{artist.rank}</div>
-                <div>
-                  <div className="display text-3xl">{artist.tag}</div>
-                  <div className="text-sm text-muted">
-                    {artist.city} • {artist.piece}
-                  </div>
-                </div>
-                <div className="text-left md:text-right">
-                  <div className="text-xs uppercase tracking-[0.2em] text-muted">Score</div>
-                  <div className="text-2xl font-semibold">{artist.score}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+      <section className="bg-[#f1f1ee] py-12 text-black"><div className="section-shell"><div className="flex items-end justify-between"><div><div className="text-xs font-black uppercase tracking-[.2em] text-red">Latest uploads</div><h2 className="display mt-2 text-5xl">New movement on the map</h2></div><Link href="/map" className="street-link">View all →</Link></div><div className="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-4">{latestSpots.map((spot,index)=><article key={spot.title} className="border-2 border-black bg-white p-3 shadow-[7px_7px_0_#090909]"><div className={`h-44 bg-[url('/art/wallrank-brick-graffiti.png')] bg-cover ${index%2?"bg-right":"bg-left"}`} /><div className="pt-4"><div className="flex justify-between gap-3"><h3 className="font-black uppercase">{spot.title}</h3><span className="text-xs font-bold text-red">{spot.rating.toFixed(1)}</span></div><p className="mt-1 text-sm text-black/65">{spot.city} · {spot.status}</p></div></article>)}</div></div></section>
 
-        <div className="grid gap-6">
-          <div className="panel rounded-[32px] p-6">
-            <div className="eyebrow">Top supporters</div>
-            <h2 className="display mt-2 text-4xl">People pushing the culture</h2>
-            <div className="mt-6 grid gap-4">
-              {supporters.map((supporter) => (
-                <div key={supporter.name} className="rounded-[24px] border border-line bg-black/20 p-4">
-                  <div className="flex items-center justify-between gap-4">
-                    <div>
-                      <div className="text-lg font-medium">{supporter.name}</div>
-                      <div className="text-sm text-muted">{supporter.summary}</div>
-                    </div>
-                    <div className="rounded-full bg-accent-soft px-3 py-1 text-sm font-medium text-sand">
-                      {supporter.points} pts
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="panel rounded-[32px] p-6">
-            <div className="eyebrow">Concrete Culture features</div>
-            <h2 className="display mt-2 text-4xl">Store, magazine, season</h2>
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
-              {["In-store spotlight", "Magazine preview", "Artist feature tile"].map((item) => (
-                <div key={item} className="rounded-[24px] border border-dashed border-line p-4 text-sm text-muted">
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-shell py-10">
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <div className="eyebrow">Latest uploads</div>
-            <h2 className="display mt-2 text-4xl">New movement on the map</h2>
-          </div>
-          <Link href="/map" className="text-sm text-sand">
-            Open full map
-          </Link>
-        </div>
-        <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {latestSpots.map((spot) => (
-            <article key={spot.title} className="panel overflow-hidden rounded-[28px]">
-              <div className="h-44 bg-[linear-gradient(135deg,#2a2d2f_0%,#121314_55%,#2d1a0a_100%)]" />
-              <div className="p-5">
-                <div className="flex items-center justify-between gap-3">
-                  <h3 className="text-lg font-medium">{spot.title}</h3>
-                  <span className="rounded-full bg-accent-soft px-2 py-1 text-xs uppercase tracking-[0.2em] text-sand">
-                    {spot.status}
-                  </span>
-                </div>
-                <div className="mt-2 text-sm text-muted">{spot.city}</div>
-                <div className="mt-5 flex items-center justify-between text-sm">
-                  <span className="text-muted">Avg rating</span>
-                  <span className="font-medium text-foreground">{spot.rating.toFixed(1)}</span>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
+      <section className="section-shell grid gap-6 py-12 lg:grid-cols-2">
+        <article className="line-panel p-7"><div className="eyebrow">Founding store sponsor</div><h2 className="display mt-3 text-6xl"><span className="text-accent">Concrete Culture</span><br />Hamilton, Ontario</h2><p className="mt-5 max-w-xl leading-7 text-white/80">Concrete Culture is WallRank’s first store sponsor and affiliate—a Hamilton-based partner helping us create a stronger bridge between the city’s walls, its artists, and the people who follow the work.</p><p className="mt-4 max-w-xl text-sm leading-6 text-muted">Hamilton’s street-art story includes a city-supported legal wall and a growing network of murals shaped by local and visiting artists. WallRank is proud to build from that energy with a founding partner rooted in the city.</p><div className="mt-7 flex flex-wrap gap-4"><Link href="/magazine" className="street-button street-button--yellow">Read the sponsor story →</Link><a href="https://tourismhamilton.com/street-art-guide/" target="_blank" rel="noreferrer" className="street-button">Hamilton street-art guide ↗</a></div></article>
+        <article className="red-panel p-7"><div className="text-xs font-black uppercase tracking-[.2em] text-black">Staff dispatch</div><h2 className="display mt-3 text-6xl">The Weekly Wall</h2><p className="mt-3 max-w-xl leading-7">Events. Fresh uploads. Artist stories. Monthly rankings. One bright email from the WallRank staff every week.</p><div className="mt-7"><NewsletterForm /></div></article>
       </section>
     </div>
   );

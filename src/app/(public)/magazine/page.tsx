@@ -1,21 +1,11 @@
-import { PageHeader } from "@/components/app-shell/page-header";
-import { PlaceholderGrid } from "@/components/app-shell/placeholder-grid";
+import { NewsletterForm } from "@/components/newsletter-form";
 
 export default function MagazinePage() {
   return (
-    <>
-      <PageHeader
-        eyebrow="Magazine"
-        title="Seasonal feature space."
-        description="MVP keeps this route as a placeholder, but the shell is ready for editorial previews and future Concrete Culture feature integrations."
-      />
-      <PlaceholderGrid
-        items={[
-          { title: "Seasonal issue teaser", body: "Hero tile for the latest issue or feature collection." },
-          { title: "Top 5 recap", body: "Monthly artist snapshots can feed future magazine blocks." },
-          { title: "Store crossover", body: "The same featured-artist system can serve in-store and magazine promos." },
-        ]}
-      />
-    </>
+    <div className="pb-16">
+      <section className="brick-band py-16"><div className="section-shell"><div className="line-panel max-w-4xl p-8"><div className="eyebrow">Founding store sponsor</div><h1 className="display mt-3 text-7xl leading-[.9] md:text-9xl"><span className="text-accent">Concrete Culture</span><br />Hamilton, Ontario</h1></div></div></section>
+      <section className="section-shell grid gap-7 py-12 lg:grid-cols-[1.2fr_.8fr]"><article className="light-panel p-7"><h2 className="display text-5xl">A first partner for the wall</h2><p className="mt-5 text-lg leading-8">Concrete Culture is a Hamilton-based store and WallRank’s first store sponsor and affiliate. This partnership is designed to connect online discovery with the people and places sustaining street culture in the city.</p><p className="mt-5 leading-7 text-black/70">Hamilton has an established and evolving street-art story. The City opened its first legal wall at Woodlands Park in 2019, creating an approved space for emerging artists to practise and display their work. Tourism Hamilton’s street-art guide also documents murals across the city and the role of Concrete Canvas in bringing local and visiting artists together.</p><div className="mt-7 flex flex-wrap gap-4"><a href="https://www.hamilton.ca/city-council/news-notices/news-releases/city-hamilton-launches-legal-wall-street-art" target="_blank" rel="noreferrer" className="street-button street-button--red">City legal wall story ↗</a><a href="https://tourismhamilton.com/street-art-guide/" target="_blank" rel="noreferrer" className="street-button street-button--yellow">Street-art guide ↗</a></div></article><aside className="line-panel p-7"><div className="display inline-block rotate-[-3deg] border-4 border-accent p-5 text-4xl text-accent">Founding<br />Partner</div><h2 className="display mt-8 text-4xl">What this sponsorship means</h2><p className="mt-4 leading-7 text-white/75">A dedicated sponsor spotlight, stronger artist storytelling, community event coverage, and a local home base for future WallRank collaborations.</p><p className="mt-5 text-sm text-muted">We will add verified store links, address, hours, and product details when Concrete Culture supplies or confirms them.</p></aside></section>
+      <section className="section-shell"><div className="red-panel grid gap-8 p-7 md:grid-cols-[1fr_.8fr]"><div><div className="text-xs font-black uppercase tracking-[.2em] text-black">Weekly staff email</div><h2 className="display mt-3 text-7xl">The Weekly Wall</h2><p className="mt-4 max-w-xl text-lg leading-7">Get event notes, fresh wall uploads, artist features, and monthly ranking movement from the WallRank staff.</p><div className="mt-6 flex flex-wrap gap-3 text-sm font-bold uppercase"><span className="border border-black px-3 py-2">Events</span><span className="border border-black px-3 py-2">New walls</span><span className="border border-black px-3 py-2">Rankings</span></div></div><NewsletterForm /></div></section>
+    </div>
   );
 }

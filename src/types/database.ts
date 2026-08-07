@@ -155,6 +155,23 @@ export type Database = {
         };
         Update: Partial<Database["public"]["Tables"]["monthly_leaderboards"]["Row"]>;
       };
+      newsletter_subscribers: {
+        Row: {
+          id: string;
+          email: string;
+          source: string;
+          status: "active" | "unsubscribed";
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          email: string;
+          source?: string;
+          status?: "active" | "unsubscribed";
+          created_at?: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["newsletter_subscribers"]["Row"]>;
+      };
       ratings: {
         Row: {
           artist_id: string | null;
