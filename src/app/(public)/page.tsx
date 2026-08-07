@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { NewsletterForm } from "@/components/newsletter-form";
@@ -34,6 +35,21 @@ export default function HomePage() {
       <section className="section-shell grid gap-6 py-12 lg:grid-cols-2">
         <article className="line-panel p-7"><div className="eyebrow">Founding store sponsor</div><h2 className="display mt-3 text-6xl"><span className="text-accent">Concrete Culture</span><br />Hamilton, Ontario</h2><p className="mt-5 max-w-xl leading-7 text-white/80">Concrete Culture is WallRank’s first store sponsor and affiliate—a Hamilton-based partner helping us create a stronger bridge between the city’s walls, its artists, and the people who follow the work.</p><p className="mt-4 max-w-xl text-sm leading-6 text-muted">Hamilton’s street-art story includes a city-supported legal wall and a growing network of murals shaped by local and visiting artists. WallRank is proud to build from that energy with a founding partner rooted in the city.</p><div className="mt-7 flex flex-wrap gap-4"><Link href="/magazine" className="street-button street-button--yellow">Read the sponsor story →</Link><a href="https://tourismhamilton.com/street-art-guide/" target="_blank" rel="noreferrer" className="street-button">Hamilton street-art guide ↗</a></div></article>
         <article className="red-panel p-7"><div className="text-xs font-black uppercase tracking-[.2em] text-black">Staff dispatch</div><h2 className="display mt-3 text-6xl">The Weekly Wall</h2><p className="mt-3 max-w-xl leading-7">Events. Fresh uploads. Artist stories. Monthly rankings. One bright email from the WallRank staff every week.</p><div className="mt-7"><NewsletterForm /></div></article>
+      </section>
+
+      <section className="section-shell pb-12">
+        <article className="line-panel grid overflow-hidden lg:grid-cols-[.8fr_1.2fr]">
+          <div className="relative min-h-[360px] border-b border-white/40 lg:border-b-0 lg:border-r">
+            <Image src="/art/404-kidz-genesis-season-01.png" alt="404 KiDZ Genesis Season 01 Not Found artwork" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+          </div>
+          <div className="p-7 md:p-10">
+            <div className="eyebrow">NFT + story universe affiliate</div>
+            <h2 className="display mt-3 text-6xl md:text-7xl"><span className="text-red">404 KiDZ</span><br />Genesis signal detected</h2>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-white/80">404 KiDZ joins WallRank as a project affiliate and sponsor: a graffiti-charged collectible universe beginning with Genesis Season 01 and designed to grow into physical figures, limited apparel, trading cards, animation, and game experiences.</p>
+            <p className="mt-4 max-w-2xl leading-7 text-muted">The collection is currently in launch preparation. Its public mint date and official mint link have not been announced yet, so WallRank will publish the verified launch details here when they are locked.</p>
+            <div className="mt-7 flex flex-wrap gap-4"><Link href="/magazine#404-kidz" className="street-button street-button--red">Explore 404 KiDZ -&gt;</Link><Link href="/magazine#not-found-series" className="street-button street-button--yellow">Meet the series -&gt;</Link></div>
+          </div>
+        </article>
       </section>
     </div>
   );
