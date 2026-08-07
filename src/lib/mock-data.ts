@@ -112,6 +112,26 @@ export const mockArtistLeaderboard: LeaderboardItem[] = [
     totalPoints: 712,
     avgRating: 4.11,
   },
+  {
+    rank: 4,
+    entityId: "dddddddd-dddd-dddd-dddd-dddddddddddd",
+    name: "KILO",
+    slug: "kilo",
+    city: "Hamilton",
+    monthlyPoints: 9,
+    totalPoints: 641,
+    avgRating: 4.02,
+  },
+  {
+    rank: 5,
+    entityId: "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee",
+    name: "HEX",
+    slug: "hex",
+    city: "Burlington",
+    monthlyPoints: 7,
+    totalPoints: 598,
+    avgRating: 3.96,
+  },
 ];
 
 export const mockSupporterLeaderboard: LeaderboardItem[] = [

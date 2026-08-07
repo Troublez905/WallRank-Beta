@@ -40,7 +40,7 @@ export async function getLeaderboard(type: LeaderboardType): Promise<Leaderboard
 
     const artists = data as ArtistRow[];
 
-    return artists.map((artist, index) => ({
+    const liveArtists = artists.map((artist, index) => ({
       rank: index + 1,
       entityId: artist.id,
       name: artist.tag_name,
@@ -50,6 +50,10 @@ export async function getLeaderboard(type: LeaderboardType): Promise<Leaderboard
       totalPoints: artist.total_points,
       avgRating: artist.all_time_avg_rating,
     }));
+
+    const seen = new Set(liveArtists.map((artist) => artist.entityId));
+    const fillers = mockArtistLeaderboard.filter((artist) => !seen.has(artist.entityId));
+    return [...liveArtists, ...fillers].slice(0, 10).map((artist, index) => ({ ...artist, rank: index + 1 }));
   }
 
   const { data, error } = await supabase
