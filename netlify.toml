@@ -1,0 +1,7 @@
+# Vercel is WallRank's canonical production host. Keep the legacy Netlify
+# address working while consolidating analytics, SEO, and user traffic.
+[[redirects]]
+  from = "/*"
+  to = "https://wall-rank.vercel.app/:splat"
+  status = 301
+  force = true
