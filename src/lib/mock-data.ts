@@ -23,8 +23,8 @@ export const mockSpots: SpotListItem[] = [
       visibility: "public_approximate",
     },
     primaryImage: {
-      imageUrl: "https://images.unsplash.com/photo-1513039464749-94912b3841e7?auto=format&fit=crop&w=1200&q=80",
-      thumbnailUrl: "https://images.unsplash.com/photo-1513039464749-94912b3841e7?auto=format&fit=crop&w=800&q=80",
+      imageUrl: "/art/wallrank-brick-graffiti.png",
+      thumbnailUrl: "/art/wallrank-brick-graffiti.png",
     },
   },
   {
@@ -49,8 +49,8 @@ export const mockSpots: SpotListItem[] = [
       visibility: "public_exact",
     },
     primaryImage: {
-      imageUrl: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
-      thumbnailUrl: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80",
+      imageUrl: "/art/404-kidz-genesis-season-01.png",
+      thumbnailUrl: "/art/404-kidz-genesis-season-01.png",
     },
   },
   {
@@ -75,8 +75,8 @@ export const mockSpots: SpotListItem[] = [
       visibility: "public_approximate",
     },
     primaryImage: {
-      imageUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=80",
-      thumbnailUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=800&q=80",
+      imageUrl: "/art/wallrank-brick-graffiti.png",
+      thumbnailUrl: "/art/wallrank-brick-graffiti.png",
     },
   },
 ];

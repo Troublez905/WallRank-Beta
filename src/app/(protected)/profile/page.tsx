@@ -63,21 +63,7 @@ export default async function ProfilePage() {
             ))}
           </div>
 
-          <div className="panel rounded-[32px] p-6">
-            <div className="eyebrow">Activity</div>
-            <h2 className="display mt-2 text-4xl">Contribution snapshot</h2>
-            <div className="mt-6 grid gap-4 md:grid-cols-3">
-              <div className="rounded-[24px] border border-line p-4 text-sm leading-6 text-muted">
-                Your uploads count comes from `artworks.submitted_by_user_id`.
-              </div>
-              <div className="rounded-[24px] border border-line p-4 text-sm leading-6 text-muted">
-                Your comment total comes from the `comments` table and will later feed supporter reward logic.
-              </div>
-              <div className="rounded-[24px] border border-line p-4 text-sm leading-6 text-muted">
-                Your rating count comes from the one-vote-per-artwork ledger in `ratings`.
-              </div>
-            </div>
-          </div>
+          <div className="panel rounded-[32px] p-6"><div className="eyebrow">Saved walls</div><div className="flex flex-wrap items-end justify-between gap-4"><h2 className="display mt-2 text-4xl">Your favorites</h2><Link href="/map" className="street-link text-sm">Discover more</Link></div><div className="mt-6 grid gap-4 md:grid-cols-2">{profile.favorites.length ? profile.favorites.map((spot)=><Link key={spot.id} href={`/spots/${spot.slug}`} className="group overflow-hidden border border-line bg-black/30"><div className="h-36 bg-cover bg-center transition group-hover:scale-[1.02]" style={{backgroundImage:`linear-gradient(180deg,transparent,rgba(0,0,0,.72)),url(${spot.primaryImage?.thumbnailUrl ?? spot.primaryImage?.imageUrl ?? ""})`}}/><div className="p-4"><div className="text-xs font-bold uppercase tracking-[.16em] text-accent">{spot.location.city} · {spot.avgRating.toFixed(1)} ★</div><div className="display mt-1 text-2xl">{spot.title}</div></div></Link>) : <p className="text-muted md:col-span-2">Save spots from any artwork page to build your personal wall list.</p>}</div></div>
         </div>
       </section>
     </div>
