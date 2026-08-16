@@ -35,3 +35,16 @@ export type LeaderboardItem = {
   totalPoints: number;
   avgRating: number | null;
 };
+
+export type SpotDetail = SpotListItem & {
+  description: string | null;
+  styleTags: string[];
+  wallType: string | null;
+  dateSeen: string | null;
+  commentsCount: number;
+  images: Array<{ imageUrl: string; thumbnailUrl: string | null; caption: string | null }>;
+  ratingsBreakdown: Record<1 | 2 | 3 | 4 | 5, number>;
+  comments: Array<{ id: string; body: string; createdAt: string; userId: string }>;
+  viewerRating: number | null;
+  isFavorite: boolean;
+};

@@ -114,6 +114,21 @@ export type Database = {
         };
         Update: Partial<Database["public"]["Tables"]["comments"]["Row"]>;
       };
+      favorites: {
+        Row: {
+          artwork_id: string;
+          created_at: string;
+          id: string;
+          user_id: string;
+        };
+        Insert: {
+          artwork_id: string;
+          created_at?: string;
+          id?: string;
+          user_id: string;
+        };
+        Update: Partial<Database["public"]["Tables"]["favorites"]["Row"]>;
+      };
       locations: {
         Row: {
           address_text: string | null;
