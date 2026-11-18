@@ -1,5 +1,6 @@
 import { PageHeader } from "@/components/app-shell/page-header";
 import { uploadSpotAction } from "@/app/(protected)/actions";
+import { MobileUploadTools, UploadSubmitButton } from "@/components/upload-enhancements";
 
 type UploadPageProps = {
   searchParams: Promise<{
@@ -102,14 +103,7 @@ export default async function UploadPage({ searchParams }: UploadPageProps) {
                 <option value="hidden_admin_only">Hidden admin only</option>
               </select>
             </label>
-            <label className="grid gap-2 text-sm">
-              <span className="text-muted">Latitude</span>
-              <input required type="number" step="0.000001" name="latitude" defaultValue="43.255203" className="rounded-[18px] border border-line bg-black/20 px-4 py-3 outline-none transition focus:border-accent" />
-            </label>
-            <label className="grid gap-2 text-sm">
-              <span className="text-muted">Longitude</span>
-              <input required type="number" step="0.000001" name="longitude" defaultValue="-79.868202" className="rounded-[18px] border border-line bg-black/20 px-4 py-3 outline-none transition focus:border-accent" />
-            </label>
+            <MobileUploadTools />
           </div>
 
           <div className="panel grid gap-5 rounded-[32px] p-6">
@@ -117,15 +111,6 @@ export default async function UploadPage({ searchParams }: UploadPageProps) {
               <div className="eyebrow">Step 3</div>
               <h2 className="display mt-2 text-4xl">Finish submission</h2>
             </div>
-            <label className="grid gap-2 text-sm">
-              <span className="text-muted">Artwork image</span>
-              <input
-                type="file"
-                name="imageFile"
-                accept="image/png,image/jpeg,image/webp,image/avif"
-                className="rounded-[18px] border border-line bg-black/20 px-4 py-3 outline-none transition file:mr-4 file:rounded-full file:border-0 file:bg-accent file:px-4 file:py-2 file:font-medium file:text-black focus:border-accent"
-              />
-            </label>
             <label className="grid gap-2 text-sm">
               <span className="text-muted">Remote image URL fallback</span>
               <input
@@ -143,9 +128,7 @@ export default async function UploadPage({ searchParams }: UploadPageProps) {
             </label>
             <div className="flex items-center justify-between gap-4">
               <div className="text-sm text-muted">New submissions are stored with `pending` status until a moderator reviews them.</div>
-              <button type="submit" className="rounded-full bg-accent px-5 py-3 font-medium text-black">
-                Submit spot
-              </button>
+              <UploadSubmitButton />
             </div>
           </div>
         </form>
